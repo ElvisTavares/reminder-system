@@ -9,7 +9,7 @@ class Reminder extends Model
 {
     use HasFactory;
 
-    protected $table = 'Reminder';
+    protected $table = 'reminder';
     protected $fillable = [
         'name',
         'descReminder',

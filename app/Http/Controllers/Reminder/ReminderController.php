@@ -27,7 +27,23 @@ class ReminderController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        //opção para salvar 1
+        // $dataReminder = [
+        //     'name' => $request->nameReminder,
+        //     'descReminder' => $request->descReminder,
+        // ];
+
+        // Reminder::create($dataReminder);
+        //opção para salvar 1
+
+        //opção 2
+        $reminder = new Reminder;
+        $reminder->name = $request->nameReminder;
+        $reminder->descReminder = $request->descReminder;
+        $reminder->save();
+
+        //opção 2
+        return 'Save';
     }
 
 
