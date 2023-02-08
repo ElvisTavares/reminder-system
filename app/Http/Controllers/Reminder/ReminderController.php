@@ -48,10 +48,17 @@ class ReminderController extends Controller
         
         $user = Auth::user();
         $email = new ReminderCreated($reminder->name);
-        Mail::to($user)->send($email);
+        //Mail::to($user)->send($email);
+
+        //como envia o lembrete criado para um usuario, aqui pode ser assim
+        //Mail::to($user)->queue($email);
+
+        //se fosse enviado email a varios usuarios quando criar o lembrete, seria interessande criar assim
+        //no caso vai enviar um email a cada 5 segundos
+        $when = now()->addSeconds(5);
+        Mail::to($user)->later($when,$email);
         sleep(2);
 
-        
         return 'Save';
     }
 
