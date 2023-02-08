@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Reminder;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ReminderCreated;
 use App\Models\Reminder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ReminderController extends Controller
 {
@@ -41,8 +44,14 @@ class ReminderController extends Controller
         $reminder->name = $request->nameReminder;
         $reminder->descReminder = $request->descReminder;
         $reminder->save();
-
         //opção 2
+        
+        $user = Auth::user();
+        $email = new ReminderCreated($reminder->name);
+        Mail::to($user)->send($email);
+        sleep(2);
+
+        
         return 'Save';
     }
 
