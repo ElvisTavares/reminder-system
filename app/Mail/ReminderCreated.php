@@ -19,7 +19,8 @@ class ReminderCreated extends Mailable
      * @return void
      */
     public function __construct(
-        public string $nameReminder
+        public string $nameReminder,
+        public string $descReminder,
     )
     {
         $this->subject = "Lembrete $nameReminder criado";

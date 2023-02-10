@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Reminder;
 
+use App\Events\EventsReminderCreated;
 use App\Http\Controllers\Controller;
 use App\Mail\ReminderCreated;
 use App\Models\Reminder;
@@ -47,17 +48,25 @@ class ReminderController extends Controller
         //opção 2
         
         $user = Auth::user();
-        $email = new ReminderCreated($reminder->name);
+        // $email = new ReminderCreated($reminder->name);
         //Mail::to($user)->send($email);
 
         //como envia o lembrete criado para um usuario, aqui pode ser assim
         //Mail::to($user)->queue($email);
 
+        //  <-------->
         //se fosse enviado email a varios usuarios quando criar o lembrete, seria interessande criar assim
         //no caso vai enviar um email a cada 5 segundos
-        $when = now()->addSeconds(5);
-        Mail::to($user)->later($when,$email);
-        sleep(2);
+        // $when = now()->addSeconds(5);
+        // Mail::to($user)->later($when,$email);
+        // sleep(2);
+         //  <-------->
+
+         EventsReminderCreated::dispatch(
+            $reminder->name,
+            $reminder->descReminder,
+         );
+        
 
         return 'Save';
     }
