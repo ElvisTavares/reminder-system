@@ -9,6 +9,7 @@ use App\Models\Reminder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\ReminderRequest;
 
 class ReminderController extends Controller
 {
@@ -29,7 +30,7 @@ class ReminderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReminderRequest $request)
     {
         //opção para salvar 1
         // $dataReminder = [
