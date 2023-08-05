@@ -13,5 +13,6 @@ class Reminder extends Model
     protected $fillable = [
         'name',
         'descReminder',
+        'cover',
     ];
 }

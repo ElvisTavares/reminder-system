@@ -30,5 +30,5 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/insert', [ReminderController::class, 'store'])->name('reminder.store');
-
+Route::get('list', [ReminderController::class, 'index'])->name('list');
 require __DIR__.'/auth.php';

@@ -20,7 +20,9 @@ class ReminderController extends Controller
      */
     public function index()
     {
-        //
+        $reminders = Reminder::all();
+        
+        return view('reminder.index')->with('reminders', $reminders);
     }
 
 
@@ -32,6 +34,7 @@ class ReminderController extends Controller
      */
     public function store(ReminderRequest $request)
     {
+ 
         //opção para salvar 1
         // $dataReminder = [
         //     'name' => $request->nameReminder,
@@ -42,9 +45,14 @@ class ReminderController extends Controller
         //opção para salvar 1
 
         //opção 2
+
+        $coverPath = $request->file('cover')->store('reminder_cover', 'public');
+        
         $reminder = new Reminder;
+       
         $reminder->name = $request->nameReminder;
         $reminder->descReminder = $request->descReminder;
+        $reminder->cover = $coverPath;
         $reminder->save();
         //opção 2
         
